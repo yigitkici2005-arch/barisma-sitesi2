@@ -51,6 +51,11 @@
             color: white;
             font-size: 1.5em; /* Başlangıç boyutu */
         }
+        
+        /* Eklenen CSS: Butonu gizlemek için */
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -65,17 +70,27 @@
     <script>
         const evetButonu = document.getElementById('evet');
         const hayirButonu = document.getElementById('hayir');
+        
+        // --- Yeni Dinamikler ---
+        let tiklanmaSayisi = 0;
+        const MAKS_TIKLAMA = 5; // HAYIR butonuna basılabilecek maksimum sayı
 
-        // Başlangıç boyutlarını piksel cinsinden alalım (tarayıcıya göre ayarlanır)
+        // Başlangıç boyutlarını piksel cinsinden tanımlayalım
         let evetBoyut = 24; // font-size (px)
         let hayirBoyut = 24; // font-size (px)
-        
-        // Hayır butonunun üzerine basılma sayısını tutalım
-        let tiklanmaSayisi = 0;
 
         // HAYIR butonuna tıklandığında
         hayirButonu.addEventListener('click', () => {
             tiklanmaSayisi++;
+            
+            // Eğer maksimum tıklamaya ulaşıldıysa
+            if (tiklanmaSayisi >= MAKS_TIKLAMA) {
+                hayirButonu.classList.add('hidden'); // Butonu gizle
+                evetBoyut += 8; // Son bir büyüme
+                evetButonu.style.fontSize = evetBoyut + 'px';
+                evetButonu.textContent = "EVET (Tek Seçenek)"; // Metni değiştir
+                return; // Fonksiyonu durdur
+            }
             
             // EVET butonunu büyüt
             evetBoyut += 8; 
@@ -94,15 +109,15 @@
                 hayirButonu.textContent = "Lütfen dur.";
             } else if (tiklanmaSayisi === 3) {
                 hayirButonu.textContent = "Bu kadar mı sevmiyorsun?";
-            } else if (tiklanmaSayisi > 3) {
-                hayirButonu.textContent = "HAYIR (Artık görünmüyor bile)";
+            } else if (tiklanmaSayisi === 4) {
+                hayirButonu.textContent = "SON ŞANSIN!";
             }
         });
 
         // EVET butonuna tıklandığında
         evetButonu.addEventListener('click', () => {
-            alert("Seni çok seviyorum! Bu cevabın beni dünyanın en mutlu insanı yaptı! ❤️ Hemen ara!");
-            // İsteğe bağlı: alert yerine farklı bir barışma sayfasına yönlendirebilirsiniz.
+            // İstenen yeni mesaj
+            alert("Seni çok seviyorum yavrum! ❤️ Hemen ara!");
         });
     </script>
 
