@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Sorum Var ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #d9534f; /* Hafif kırmızı */
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px; /* Butonlar arası boşluk */
+            align-items: center;
+        }
+
+        .button {
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease; /* Yumuşak geçiş efekti */
+            white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
+        }
+
+        #evet {
+            background-color: #5cb85c; /* Yeşil */
+            color: white;
+            font-size: 1.5em; /* Başlangıç boyutu */
+        }
+
+        #hayir {
+            background-color: #f0ad4e; /* Turuncu */
+            color: white;
+            font-size: 1.5em; /* Başlangıç boyutu */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Seni Çok Seviyorum. Benimle Barışır mısın? ❤️</h1>
+    
+    <div class="button-container">
+        <button class="button" id="evet">EVET</button>
+        <button class="button" id="hayir">HAYIR</button>
+    </div>
+
+    <script>
+        const evetButonu = document.getElementById('evet');
+        const hayirButonu = document.getElementById('hayir');
+
+        // Başlangıç boyutlarını piksel cinsinden alalım (tarayıcıya göre ayarlanır)
+        let evetBoyut = 24; // font-size (px)
+        let hayirBoyut = 24; // font-size (px)
+        
+        // Hayır butonunun üzerine basılma sayısını tutalım
+        let tiklanmaSayisi = 0;
+
+        // HAYIR butonuna tıklandığında
+        hayirButonu.addEventListener('click', () => {
+            tiklanmaSayisi++;
+            
+            // EVET butonunu büyüt
+            evetBoyut += 8; 
+            evetButonu.style.fontSize = evetBoyut + 'px';
+            
+            // HAYIR butonunu küçült (minimum 12px'e kadar küçülsün)
+            if (hayirBoyut > 12) {
+                hayirBoyut -= 4;
+                hayirButonu.style.fontSize = hayirBoyut + 'px';
+            }
+
+            // HAYIR butonunun metnini değiştirerek komik bir etki yaratalım
+            if (tiklanmaSayisi === 1) {
+                hayirButonu.textContent = "Hadi ama...";
+            } else if (tiklanmaSayisi === 2) {
+                hayirButonu.textContent = "Lütfen dur.";
+            } else if (tiklanmaSayisi === 3) {
+                hayirButonu.textContent = "Bu kadar mı sevmiyorsun?";
+            } else if (tiklanmaSayisi > 3) {
+                hayirButonu.textContent = "HAYIR (Artık görünmüyor bile)";
+            }
+        });
+
+        // EVET butonuna tıklandığında
+        evetButonu.addEventListener('click', () => {
+            alert("Seni çok seviyorum! Bu cevabın beni dünyanın en mutlu insanı yaptı! ❤️ Hemen ara!");
+            // İsteğe bağlı: alert yerine farklı bir barışma sayfasına yönlendirebilirsiniz.
+        });
+    </script>
+
+</body>
+</html>
